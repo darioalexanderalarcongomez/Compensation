@@ -1,0 +1,25 @@
+﻿@model Compensation.Models.Employee
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-info text-white fw-bold">Employee Details</div>
+            <div class="card-body">
+                <dl class="row mb-4">
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.FirstName)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.FirstName)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.LastName)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.LastName)</dd>
+                </dl>
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Edit" asp-route-id="@Model?.Employee_Id" class="btn btn-outline-primary">Edit</a>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

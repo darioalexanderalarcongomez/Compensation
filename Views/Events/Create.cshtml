@@ -1,0 +1,62 @@
+﻿@model Compensation.ViewModel.EventViewModel
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white fw-bold">Create Event</div>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="mb-3">
+                        <label asp-for="Description_Event" class="form-label"></label>
+                        <input asp-for="Description_Event" class="form-control" />
+                        <span asp-validation-for="Description_Event" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ClockIn_Event" class="form-label"></label>
+                        <input asp-for="ClockIn_Event" class="form-control" />
+                        <span asp-validation-for="ClockIn_Event" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ClockOut_Event" class="form-label"></label>
+                        <input asp-for="ClockOut_Event" class="form-control" />
+                        <span asp-validation-for="ClockOut_Event" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Fare_Id" class="form-label"></label>
+                        <select asp-for="Fare_Id" class="form-select" required="required" asp-items="ViewBag.Fare_Id">
+                            <option>--Select Fare--</option>
+                        </select>
+                        <span asp-validation-for="Fare_Id" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Employee_Id" class="form-label"></label>
+                        <select asp-for="Employee_Id" class="form-select" required="required" asp-items="ViewBag.Employee_Id">
+                            <option>--Select Employee--</option>
+                        </select>
+                        <span asp-validation-for="Employee_Id" class="text-danger"></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <input type="submit" value="Create" class="btn btn-success px-4" />
+                        <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+                <span asp-validation-for="Venue_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

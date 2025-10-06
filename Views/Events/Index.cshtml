@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Compensation.Models.Event> 
+
+@{
+    ViewData["Title"] = "Index";
+    var isEventAscending = ViewBag.CurrentSort == "Event";
+    var isClockInAscending = ViewBag.CurrentSort == "ClockIn";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-bold text-primary">Events</h1>
+    <a asp-action="Create" class="btn btn-success btn-lg shadow">+ Create New</a>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle shadow-sm">
+        <thead class="table-primary">
+            <tr>
+                <th>
+                    <a asp-controller="Events" asp-action="Index" asp-route-sortOrder="@ViewBag.EventSortParam" class="text-decoration-none text-dark">
+                        @Html.DisplayNameFor(model => model.Description_Event)
+                        @if (isEventAscending)
+                        {
+                            <span>&#9650;</span>
+                        }
+                        else
+                        {
+                            <span>&#9660;</span>
+                        }
+                    </a>
+                </th>
+                <th>@Html.DisplayNameFor(model => model.Venue)</th>
+                <th>
+                    <a asp-controller="Events" asp-action="Index" asp-route-sortOrder="@ViewBag.ClockInSortParam" class="text-decoration-none text-dark">
+                        @Html.DisplayNameFor(model => model.ClockIn_Event)
+                        @if (isClockInAscending)
+                        {
+                            <span>&#9650;</span>
+                        }
+                        else
+                        {
+                            <span>&#9660;</span>
+                        }
+                    </a>
+                </th>
+                <th>@Html.DisplayNameFor(model => model.ClockOut_Event)</th>
+                <th>@Html.DisplayNameFor(model => model.Fare.Fare_Value)</th>
+                <th>@Html.DisplayNameFor(model => model.Profit)</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+@foreach (var item in Model) {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Description_Event)</td>
+                <td>@Html.DisplayFor(modelItem => item.Venue.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.ClockIn_Event)</td>
+                <td>@Html.DisplayFor(modelItem => item.ClockOut_Event)</td>
+                <td>@Html.DisplayFor(modelItem => item.Fare.Fare_Value)</td>
+                <td>@Html.DisplayFor(modelItem => item.Profit)</td>
+                <td class="text-end">
+                    <a asp-action="Edit" asp-route-id="@item.Event_Id" class="btn btn-sm btn-outline-primary me-1">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Event_Id" class="btn btn-sm btn-outline-info me-1">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Event_Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+}
+        </tbody>
+    </table>
+</div>

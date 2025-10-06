@@ -1,0 +1,27 @@
+﻿@model Compensation.Models.Payment
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-info text-white fw-bold">Payment Details</div>
+            <div class="card-body">
+                <dl class="row mb-4">
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.PaymentOrder)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.PaymentOrder)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.TypePayment)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.TypePayment.DescriptionType)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Event)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Event.Description_Event)</dd>
+                </dl>
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Edit" asp-route-id="@Model?.Payment_Id" class="btn btn-outline-primary">Edit</a>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

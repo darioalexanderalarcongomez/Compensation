@@ -1,0 +1,43 @@
+﻿@model Compensation.Models.Event
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-info text-white fw-bold">Event Details</div>
+            <div class="card-body">
+                <dl class="row mb-4">
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Description_Event)</dt>
+                    <dd class="col-sm-8"><h4>@Html.DisplayFor(model => model.Description_Event)</h4></dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Venue)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Venue.Description)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ClockIn_Event)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.ClockIn_Event)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ClockOut_Event)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.ClockOut_Event)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Week)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Week)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Hours)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Hours)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Minutes)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Minutes)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Profit)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Profit)</dd>
+                </dl>
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Edit" asp-route-id="@Model?.Event_Id" class="btn btn-outline-primary">Edit</a>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Event_Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

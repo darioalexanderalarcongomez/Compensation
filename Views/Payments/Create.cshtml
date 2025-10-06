@@ -1,0 +1,40 @@
+﻿@model Compensation.ViewModel.PaymentViewModel
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white fw-bold">Create Payment</div>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="mb-3">
+                        <label asp-for="TypePayment_Id" class="form-label"></label>
+                        <select asp-for="TypePayment_Id" class="form-select" asp-items="ViewBag.TypePayment_Id"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Event_Id" class="form-label"></label>
+                        <select asp-for="Event_Id" class="form-select" asp-items="ViewBag.Event_Id"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="PaymentOrder" class="form-label"></label>
+                        <input asp-for="PaymentOrder" class="form-control" />
+                        <span asp-validation-for="PaymentOrder" class="text-danger"></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <input type="submit" value="Create" class="btn btn-success px-4" />
+                        <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
