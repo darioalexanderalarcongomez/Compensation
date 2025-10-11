@@ -35,6 +35,13 @@
                         </select>
                         <span asp-validation-for="Employee_Id" class="text-danger"></span>
                     </div>
+                    <div class="mb-3">
+                        <label asp-for="Venue_Id" class="form-label"></label>
+                        <select asp-for="Venue_Id" class="form-select" required="required" asp-items="ViewBag.Venue_Id">
+                            <option>--Select Venue--</option>
+                        </select>
+                        <span asp-validation-for="Venue_Id" class="text-danger"></span>
+                    </div>
                     <div class="d-flex justify-content-between">
                         <input type="submit" value="Create" class="btn btn-success px-4" />
                         <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
@@ -43,18 +50,6 @@
             </div>
         </div>
     </div>
-</div>
-                <span asp-validation-for="Venue_Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
