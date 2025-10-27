@@ -21,9 +21,12 @@ namespace Compensation.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            return View(await _context.Employee.ToListAsync());
+            var query = _context.Employee.OrderBy(x => x.FirstName).AsNoTracking();
+            int pageSize = 10;
+            var pagedList = await PaginatedList<Employee>.CreateAsync(query, pageNumber ?? 1, pageSize);
+            return View(pagedList);
         }
 
         // GET: Employees/Details/5

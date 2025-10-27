@@ -15,9 +15,12 @@ namespace Compensation.Controllers
         }
 
         // GET: TypePayments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            return View(await _context.TypePayment.ToListAsync());
+            var query = _context.TypePayment.OrderBy(x => x.DescriptionType).AsNoTracking();
+            int pageSize = 10;
+            var pagedList = await PaginatedList<TypePayment>.CreateAsync(query, pageNumber ?? 1, pageSize);
+            return View(pagedList);
         }
 
         // GET: TypePayments/Details/5

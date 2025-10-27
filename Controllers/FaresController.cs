@@ -20,9 +20,12 @@ namespace Compensation.Controllers
         }
 
         // GET: Fares
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            return View(await _context.Fare.OrderBy(x => x.Fare_Value).ToListAsync());
+            var query = _context.Fare.OrderBy(x => x.Fare_Value).AsNoTracking();
+            int pageSize = 10;
+            var pagedList = await PaginatedList<Fare>.CreateAsync(query, pageNumber ?? 1, pageSize);
+            return View(pagedList);
         }
 
         // GET: Fares/Details/5

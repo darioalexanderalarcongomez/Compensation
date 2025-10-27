@@ -17,10 +17,11 @@ namespace Compensation.Controllers
         }
 
         // GET: Events
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, int? pageNumber)
         {
             ViewBag.EventSortParam = sortOrder == "Event" ? "Event" : "";
             ViewBag.ClockInSortParam = sortOrder == "ClockIn" ? "ClockIn" : "";
+            ViewBag.CurrentSort = sortOrder;
 
             var query = from t1 in _context.Event.Include(x => x.Employee)
                 .Include(x => x.Fare)
@@ -32,11 +33,6 @@ namespace Compensation.Controllers
                         orderby t1.ClockIn_Event descending
                         select t1;
 
-            //var applicationDbContext = from eve in _context.Event.Include(x => x.Employee)
-            //    .Include(x => x.Fare)
-            //    .Include(x => x.Venue)
-            //                           select eve;
-            //var query = applicationDbContext;
             switch (sortOrder)
             {
                 case "Event":
@@ -49,7 +45,10 @@ namespace Compensation.Controllers
                     query = query.OrderByDescending(x => x.ClockIn_Event);
                     break;
             }
-            return View(query);
+
+            int pageSize = 10; // items per page
+            var pagedList = await PaginatedList<Event>.CreateAsync(query.AsNoTracking(), pageNumber ?? 1, pageSize);
+            return View(pagedList);
         }
 
         // GET: Events/Details/5

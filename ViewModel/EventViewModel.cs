@@ -8,7 +8,7 @@ namespace Compensation.ViewModel
 
         [Required]
         [Display(Name = "Event")]
-        public string Description_Event { get; set; }
+        public string Description_Event { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Clock In")]

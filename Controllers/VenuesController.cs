@@ -15,9 +15,12 @@ namespace Compensation.Controllers
         }
 
         // GET: Venues
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            return View(await _context.Venue.OrderBy(x => x.Description).ToListAsync());
+            var query = _context.Venue.OrderBy(x => x.Description).AsNoTracking();
+            int pageSize = 10;
+            var pagedList = await PaginatedList<Venue>.CreateAsync(query, pageNumber ?? 1, pageSize);
+            return View(pagedList);
         }
 
         // GET: Venues/Details/5

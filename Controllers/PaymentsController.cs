@@ -18,10 +18,12 @@ namespace Compensation.Controllers
         }
 
         // GET: Payments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            var applicationDbContext = _context.Payment.Include(p => p.Event).Include(p => p.TypePayment).OrderByDescending(x=>x.Event_Id);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = _context.Payment.Include(p => p.Event).Include(p => p.TypePayment).OrderByDescending(x => x.Event_Id).AsNoTracking();
+            int pageSize = 10;
+            var pagedList = await PaginatedList<Payment>.CreateAsync(applicationDbContext, pageNumber ?? 1, pageSize);
+            return View(pagedList);
         }
 
         // GET: Payments/Details/5
@@ -110,7 +112,7 @@ namespace Compensation.Controllers
                         ).Contains(t1.Event_Id)
                         orderby t1.ClockIn_Event descending
                         select t1;
-            ViewData["Event_Id"] = new SelectList(query, "Event_Id", "Description_Event",payment.Event_Id);
+            ViewData["Event_Id"] = new SelectList(query, "Event_Id", "Description_Event", payment.Event_Id);
             ViewData["TypePayment_Id"] = new SelectList(_context.TypePayment, "TypePayment_Id", "DescriptionType", payment.TypePayment_Id);
             PaymentViewModel paymentView = new PaymentViewModel()
             {
