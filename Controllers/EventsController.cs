@@ -96,7 +96,7 @@ namespace Compensation.Controllers
                     differenceDates -= 30;
                 if( _context != null)
                 {
-                    Fare fare = await _context.Fare.FindAsync(fareId);
+                    Fare? fare = await _context.Fare.FindAsync(fareId);
                     if (fare != null)
                         profit = differenceDates * (fare.Fare_Value / 60);
                     Event @event = new Event()
@@ -115,9 +115,9 @@ namespace Compensation.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            ViewData["Employee_Id"] = new SelectList(_context.Employee, "Employee_Id", "FullName", viewModel.Employee_Id);
-            ViewData["Fare_Id"] = new SelectList(_context.Fare.OrderBy(x => x.Fare_Value), "Fare_Id", "Fare_Value", fareId);
-            ViewData["Venue_Id"] = new SelectList(_context.Venue.OrderBy(x => x.Description), "Venue_Id", "Description", viewModel.Venue_Id);
+            ViewData["Employee_Id"] = new SelectList(_context.Employee, "Employee_Id", "FullName", viewModel?.Employee_Id ?? 0);
+            ViewData["Fare_Id"]= new SelectList(_context.Fare.OrderBy(x => x.Fare_Value), "Fare_Id", "Fare_Value", viewModel?.Fare_Id ?? 0);
+            ViewData["Venue_Id"] = new SelectList(_context.Venue.OrderBy(x => x.Description), "Venue_Id", "Description", viewModel?.Venue_Id ?? 0);
 
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             foreach (var error in errors)
@@ -179,7 +179,7 @@ namespace Compensation.Controllers
                         differenceDates -= 30;
                     if(_context != null)
                     {
-                        Fare fare = await _context.Fare.FindAsync (fareId);
+                        Fare? fare = await _context.Fare.FindAsync (fareId);
                         if (fare != null) 
                             profit = differenceDates * (fare.Fare_Value / 60);
 

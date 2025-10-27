@@ -63,10 +63,10 @@ namespace Compensation.Models
         public Fare Fare { get; set; }
         [ForeignKey("Employee_Id")]
         [ScaffoldColumn(false)]
-        public Employee Employee { get; set; }
+        public  Employee Employee { get; set; }
         [ForeignKey("Venue_Id")]
         [ScaffoldColumn(false)]
-        public Venue Venue { get; set; }
+        public  Venue Venue { get; set; }
         public ICollection<Payment> Payments { get; set; } = new List<Payment>();
     }
 }
